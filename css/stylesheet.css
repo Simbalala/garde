@@ -1,0 +1,261 @@
+.d{
+  border: 1px red solid;
+}
+
+.headerV2, .menuV2, .footerV2, .copyrightV2{
+  display: none;
+}
+
+/*Début Header*/
+
+            .site_content{
+              display: flex;
+              flex-direction: column;
+              min-height: 100vh;
+            }
+
+            header{
+              display: flex;
+              flex-direction: column;
+              border: 2px #000 solid;
+              margin-bottom: 0.5em;
+            }
+
+            .titre_sdis h1{
+              font-family: 'Electrolize', sans-serif;
+            }
+
+            h2{
+              font-family: 'Electrolize', sans-serif;
+            }
+            .position_head{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+
+            .contact{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .contact img{
+              max-width: 75%;
+              height: auto;
+            }
+
+            .titre_sdis{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .menu{
+              padding-top: 0.5em;
+              padding-bottom: 0.5em;
+              font-family: 'Raleway', sans-serif;
+            }
+
+            .menu ul{
+              display: flex;
+              flex-direction: row;
+              padding-left: 0.5em;
+            }
+
+            .menu_li{
+              border: 1px #000 solid;
+              padding: 0.2em;
+              border-top-right-radius: 10px;
+            }
+
+            .menu_li ul{
+              margin-top: 0.27em;
+              border-left: 1px #000 solid;
+              border-right: 1px #000 solid;
+              border-bottom: 1px #000 solid;
+            }
+
+            .menu_li ul li{
+              background-color: #C8C8C8;
+              text-align: center;
+              list-style-type: none;
+            }
+            .menu ul li:hover{
+              background-color: #C8C8C8;
+            }
+
+            .menu_li ul li:hover{
+              background-color: #FFF;
+            }
+
+            .menu ul li ul{
+              display: flex;
+              width: 8.5vh;
+              flex-direction: column;
+              padding-left: 0px;
+              text-align: center;
+
+              position: absolute;
+              left: -999em;
+              text-align: left;
+              z-index: 1000;
+            }
+
+            .menu ul li:hover ul{
+              left: auto;
+            }
+
+            .menu_li{
+                margin-right: 4px;
+                margin-left: 4px;
+                list-style-type: none;
+            }
+
+            .menu ul li a{
+              text-decoration: none;
+              color: #000;
+            }
+
+/*Fin Header*/
+
+/*Début Content*/
+.content{
+  flex: 1;
+}
+/*Fin Content*/
+
+
+/*Début Section*/
+
+            .text{
+              display: flex;
+              flex-direction: row;
+              font-family: 'Electrolize', sans-serif;
+            }
+
+            .document:nth-child(1){
+              flex: 1;
+            }
+
+/*Fin Section*/
+
+/*Debut Newsletter*/
+
+            .newsletter{
+              margin-left: 0.5em;
+              padding-left: 0.4em;
+              padding-right: 0.4em;
+              border: 2px #000 solid;
+            }
+
+            .newsletter input {
+              font-family: 'Electrolize', sans-serif;
+            }
+
+            .tableau_mail{
+              margin-top: 0.5em;
+              margin-bottom: 0.5em;
+              margin-right: 0.5em;
+            }
+
+            .texteaffichage{
+              padding-left: 0.4em;
+              padding-right: 0.4em;
+              border: 2px #000 solid;
+            }
+
+            .button{
+              padding-top: 0.15em;
+              padding-bottom: 0.15em;
+              padding-left: 0.5em;
+              padding-right: 0.5em;
+              border: 1.5px #000 solid;
+              background-color: #FFF;
+              color:#000;
+            }
+
+            .button:hover{
+              border: 1.5px #FFF solid;
+              background-color: #000;
+              color:#FFF;
+            }
+
+            .message_red{
+              color: #ea0027;
+            }
+
+            .message_green{
+              color: #00a81e;
+            }
+
+/*Fin Newsletter*/
+
+/*Début Véhicule*/
+
+          .vehicule{
+            display: flex;
+            justify-content: row;
+            margin-bottom: 0.5em;
+            flex-wrap: wrap;
+          }
+
+          .vehicule div{
+            border: 2px #000 solid;
+            margin: 0.2em;
+            text-align: center;
+          }
+
+          .vehicule div img {
+            width: 300px;
+            height: auto;
+          }
+
+          .vehicule h3{
+            font-family: 'Electrolize', sans-serif;
+          }
+
+/*Fin Véhicule*/
+
+/*Debut Footer*/
+
+
+          footer{
+            margin-top: 0.5em;
+            border: 2px #000 solid;
+          }
+
+          footer p{
+            font-family: 'Hind Vadodara', sans-serif;
+          }
+
+          footer a{
+            text-decoration: none;
+            color: #000;
+          }
+
+          .coordonnée{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+          .information ul{
+            list-style-type: none;
+          }
+
+          .carte{
+            margin: 0.5em;
+          }
+
+          .carte iframe{
+            width: 200px;
+            height: 200px;
+            border: none;
+          }
+
+          .copyright{
+            text-align: center;
+          }
+
+/*Fin Footer*/
