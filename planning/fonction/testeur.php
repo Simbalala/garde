@@ -6,6 +6,8 @@
 /*Fonction*/
   require 'fonction.php';
 
+set_time_limit(0);
+
   $ca1 = 0;
   $compteur_vsav1 = -1;
   $post = 1;
@@ -28,7 +30,6 @@
       /*Interval de jours avent d'etre a nouveaux disponible*/
           $interval_ca_vsav1 = $nb_ca_vsav * 5;
 
-
       /*Recupère l'historique des gardes passer at ajoute l'INTERVAL*/
           $historique_ca_vsav1 = historique_planning($interval_ca_vsav1, $post, $nb_ca_vsav);
         $historique_ca_vsav1 = $historique_ca_vsav1->fetchall();
@@ -37,133 +38,185 @@
     do {
       $compteur_vsav1++;
 
-            $ca_vsav1[$compteur_vsav1];
-
-
-
-
-        /*Verifie si la ligne existe*/
-            $verif_ca = verif_ligne($ca_vsav1[$compteur_vsav1]['id_personnel'], $post);
-
-
-          if ($verif_ca == 0) {
-
-            cree_ligne_planning($ca_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
-            $ca1 = 1;
-          }
-
-          else {
-
             $verif_planning = verif_planning($ca_vsav1[$compteur_vsav1]['id_personnel'], $prochaine_garde['prochaine_garde']);
 
 
-                      if ($verif_planning == 0) {
+            if ($verif_planning == 0) {
 
-                          $historique_ca_vsav1[$compteur_vsav1];
+              /*Verifie si la ligne existe*/
+              $verif_ca = verif_ligne($ca_vsav1[$compteur_vsav1]['id_personnel'], $post);
 
-                          echo 'ici verif_planning <br>';
+                    if ($verif_ca == 0) {
 
-
-                            if (strtotime($historique_ca_vsav1[$compteur_vsav1]['historique_date_garde']) <= strtotime($prochaine_garde['prochaine_garde']))
-                            {
-                                echo $historique_ca_vsav1[$compteur_vsav1]['id_personnel'] ."<br>";
-                                cree_ligne_planning($historique_ca_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
-                                $ca1 = 1;
-                            }
-
-                            else {
-                              echo 'ici else <br>';
-                              $ca1 = 0;
-                            }
-                      }
-
-                      else {
-                        $ca1 = 0;
-                      }
+                        cree_ligne_planning($ca_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                        $ca1 = 1;
+                    }
 
 
+                    else {
+
+                        $historique_ca_vsav1[$compteur_vsav1];
+
+                        echo 'ici verif_planning <br>';
+
+                        if (strtotime($historique_ca_vsav1[$compteur_vsav1]['historique_date_garde']) <= strtotime($prochaine_garde['prochaine_garde']))
+                        {
+                            echo $historique_ca_vsav1[$compteur_vsav1]['id_personnel'] ."<br>";
+                            cree_ligne_planning($historique_ca_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                            $ca1 = 1;
+                        }
+
+                        else {
+                            echo 'ici else <br>';
+                            $ca1 = 0;
+                        }
+                    }
+
+            }
+
+          else {
+            $ca1 = 0;
           }
 
     } while ($ca1 == 0);
   /* ----- FIN CA VSAV1 -----*/
 
+
+  /* ----- DEBUT CONDUCTEUR VSAV1 -----*/
+
+    $cond1 = 0;
+    $compteur_vsav1 = -1;
+    $post = 3;
+
+
+        /*Recupère dans un tableau tout mes cond*/
+        $tout_les_cond = tab_personnel(2);
+          $cond_vsav1 = $tout_les_cond->fetchall();
+
+        /*Compter personnel*/
+            $nb_cond_vsav = count($cond_vsav1);
+
+        /*Interval de jours avent d'etre a nouveaux disponible*/
+            $interval_cond_vsav1 = $nb_cond_vsav * 5;
+
+        /*Recupère l'historique des gardes passer at ajoute l'INTERVAL*/
+            $historique_cond_vsav1 = historique_planning($interval_cond_vsav1, $post, $nb_cond_vsav);
+          $historique_cond_vsav1 = $historique_cond_vsav1->fetchall();
+
+
+      do {
+        $compteur_vsav1++;
+
+              $verif_planning = verif_planning($cond_vsav1[$compteur_vsav1]['id_personnel'], $prochaine_garde['prochaine_garde']);
+
+
+              if ($verif_planning == 0) {
+
+                /*Verifie si la ligne existe*/
+                $verif_cond = verif_ligne($cond_vsav1[$compteur_vsav1]['id_personnel'], $post);
+
+                      if ($verif_cond == 0) {
+
+                          cree_ligne_planning($cond_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                          $cond1 = 1;
+                      }
+
+
+                      else {
+
+                          $historique_cond_vsav1[$compteur_vsav1];
+
+                          echo 'ici verif_planning <br>';
+
+                          if (strtotime($historique_cond_vsav1[$compteur_vsav1]['historique_date_garde']) <= strtotime($prochaine_garde['prochaine_garde']))
+                          {
+                              echo $historique_cond_vsav1[$compteur_vsav1]['id_personnel'] ."<br>";
+                              cree_ligne_planning($historique_cond_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                              $cond1 = 1;
+                          }
+
+                          else {
+                              echo 'ici else <br>';
+                              $cond1 = 0;
+                          }
+                      }
+
+              }
+
+            else {
+              $cond1 = 0;
+            }
+
+      } while ($cond1 == 0);
+    /* ----- FIN CONDUCTEUR VSAV1 -----*/
+
+
   /* ----- DEBUT EQUIPIER VSAV1 -----*/
 
-    /*Déclaration variable interne*/
-
-    $equi1 = 0;
-      $compteur_vsav1 = -1;
-      $post = 5;
+  $equi1 = 0;
+  $compteur_vsav1 = -1;
+  $post = 5;
 
 
       /*Recupère dans un tableau tout mes equi*/
-        $tout_les_equi = tab_personnel(1);
+      $tout_les_equi = tab_personnel(1);
         $equi_vsav1 = $tout_les_equi->fetchall();
 
       /*Compter personnel*/
-        $nb_equi_vsav = count($equi_vsav1);
-
+          $nb_equi_vsav = count($equi_vsav1);
 
       /*Interval de jours avent d'etre a nouveaux disponible*/
-        $interval_equi_vsav1 = $nb_equi_vsav * 5;
-
+          $interval_equi_vsav1 = $nb_equi_vsav * 5;
 
       /*Recupère l'historique des gardes passer at ajoute l'INTERVAL*/
-        $historique_equi_vsav1 = historique_planning($interval_equi_vsav1, $post, $nb_equi_vsav);
+          $historique_equi_vsav1 = historique_planning($interval_equi_vsav1, $post, $nb_equi_vsav);
         $historique_equi_vsav1 = $historique_equi_vsav1->fetchall();
 
 
     do {
       $compteur_vsav1++;
 
-            $equi_vsav1[$compteur_vsav1];
-
-
-        /*Verifie si la ligne existe*/
-          $verif_equi = verif_ligne($equi_vsav1[$compteur_vsav1]['id_personnel'], $post);
-
-
-
-
-          if ($verif_equi == 0) {
-
-            cree_ligne_planning($equi_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
-            $equi1 = 1;
-          }
-
-          else {
-
             $verif_planning = verif_planning($equi_vsav1[$compteur_vsav1]['id_personnel'], $prochaine_garde['prochaine_garde']);
 
-            echo $verif_planning ." verif_planning <br>";
-            echo $equi_vsav1[$compteur_vsav1]['id_personnel']. '<br>';
+
+            if ($verif_planning == 0) {
+
+              /*Verifie si la ligne existe*/
+              $verif_equi = verif_ligne($equi_vsav1[$compteur_vsav1]['id_personnel'], $post);
+
+                    if ($verif_equi == 0) {
+
+                        cree_ligne_planning($equi_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                        $equi1 = 1;
+                    }
 
 
-                      if ($verif_planning == 0) {
+                    else {
 
-                          $historique_equi_vsav1[$compteur_vsav1];
+                        $historique_equi_vsav1[$compteur_vsav1];
 
-                            if (strtotime($historique_equi_vsav1[$compteur_vsav1]['historique_date_garde']) <= strtotime($prochaine_garde['prochaine_garde']))
-                            {
-                                echo $historique_equi_vsav1[$compteur_vsav1]['id_personnel']. '<br>';
-                                cree_ligne_planning($historique_equi_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
-                                $equi1 = 1;
-                            }
+                        echo 'ici verif_planning <br>';
 
-                            else {
-                              $equi1 = 0;
-                            }
-                      }
+                        if (strtotime($historique_equi_vsav1[$compteur_vsav1]['historique_date_garde']) <= strtotime($prochaine_garde['prochaine_garde']))
+                        {
+                            echo $historique_equi_vsav1[$compteur_vsav1]['id_personnel'] ."<br>";
+                            cree_ligne_planning($historique_equi_vsav1[$compteur_vsav1]['id_personnel'] , $post, $prochaine_garde['prochaine_garde']);
+                            $equi1 = 1;
+                        }
 
-                      else {
-                        $equi1 = 0;
-                      }
+                        else {
+                            echo 'ici else <br>';
+                            $equi1 = 0;
+                        }
+                    }
 
+            }
 
+          else {
+            $equi1 = 0;
           }
 
     } while ($equi1 == 0);
-
   /* ----- FIN EQUIPIER VSAV1 -----*/
 
  ?>
